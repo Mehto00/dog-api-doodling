@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Header, Button, Container, Dimmer, Image, Loader,  Placeholder } from 'semantic-ui-react'
 
 
-const baseURL = "https://dog.ceo/api/breeds/image/random";
+const baseURL = "https://dog.ceo/api/breed/pomeranian/images/random";
 
 export default function App() {
   const [loading, setLoading] = useState(false);
@@ -26,11 +26,11 @@ export default function App() {
 
   return (
     <Container textAlign='center'>
-      <Header size='huge' as='h1' style={{margin:'1rem 0'}}>Dog api</Header>
-      <p style={{fontSize:'1.3rem'}}>Cheer yourself up with random dog images.</p>
+      <Header size='huge' as='h1' style={{margin:'1rem 0'}}>Dog API doodling</Header>
+      <p style={{fontSize:'1.3rem'}}>Cheer yourself up with random pom pic.</p>
       {!error && loading ?
       <Container>
-        <Placeholder fluid style={{height: '50vh'}}>
+        <Placeholder fluid>
         <Dimmer active>
           <Loader content='Loading' />
         </Dimmer>
@@ -39,12 +39,14 @@ export default function App() {
       </Container>
       :
       <Container>
-        <Placeholder fluid style={{height: '50vh'}}>
+        <div style={{display:'flex', justifyContent:'center'}}>
+        <Placeholder>
           <Image src={data.message} fluid centered />
         </Placeholder>
+        </div>
       </Container>}
       {error && <div>{error.message}</div>}
-      <Button centered onClick={getData} style={{marginTop: '1rem'}}>new pic</Button>
+      <Button centered onClick={getData} style={{marginTop: '1rem'}}>fetch</Button>
     </Container>
   );
 }
