@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { Header, Button, Container, Dimmer, Image, Loader,  Placeholder } from 'semantic-ui-react'
+import { Header, Button, Container, Dimmer, Image, Loader, } from 'semantic-ui-react'
 
 
 const baseURL = "https://dog.ceo/api/breed/pomeranian/images/random";
@@ -28,25 +28,18 @@ export default function App() {
     <Container textAlign='center'>
       <Header size='huge' as='h1' style={{margin:'1rem 0'}}>Dog API doodling</Header>
       <p style={{fontSize:'1.3rem'}}>Cheer yourself up with random pom pic.</p>
-      {!error && loading ?
-      <Container>
-        <Placeholder fluid>
-        <Dimmer active>
-          <Loader content='Loading' />
-        </Dimmer>
-          <Placeholder.Image />
-        </Placeholder>
-      </Container>
-      :
+      {!error &&
       <Container>
         <div style={{display:'flex', justifyContent:'center'}}>
-        <Placeholder>
-          <Image src={data.message} fluid centered />
-        </Placeholder>
+          <Dimmer active={loading} inverted>
+            <Loader content='Loading' />
+          </Dimmer>
+          <Image src={data.message} style={{maxHeight: '60vh'}}/>
         </div>
-      </Container>}
+      </Container>
+      }
       {error && <div>{error.message}</div>}
-      <Button centered onClick={getData} style={{marginTop: '1rem'}}>fetch</Button>
+      <Button onClick={getData} style={{marginTop: '1rem'}}>fetch</Button>
     </Container>
   );
 }
